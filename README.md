@@ -20,7 +20,7 @@ harvest the design skill once, and work fully offline after that.
 | Fetch shim | `src/fetch.ts` | Offline resource fetch (reads `content/`) |
 | Picker | `src/picker.ts` → `public/ui-picker.js` | Self-contained variant picker (`data-uidotsh-*` contract), ~9 KB, zero deps |
 | Server | `src/server.ts` | Serves a demo, the picker, and an HTTP fetch shim |
-| CLI | `src/cli.ts` (`ui`) | `ui fetch <uri…>`, `ui list`, `ui serve [port]` |
+| CLI | `src/cli.ts` (`ui`) | `ui fetch <uri…>`, `ui list`, `ui serve [port]`, `ui events`, `ui webhooks` |
 | Demo | `src/demo.ts` | Three hero variants for picker comparison |
 
 ## Install
@@ -44,6 +44,21 @@ bun test                 # fetch-shim + content-tree tests (needs content/)
 
 ui fetch uidotsh://ui/design-guidelines/buttons
 ui list
+```
+
+## CLI output
+
+Human-readable list commands are compact by default so agent terminals do not
+fill with huge records. Use `--limit <n>` and `--cursor <n>` to page through
+rows, `--verbose` for extra columns, `show`/`inspect` for one record, and
+`--json` when a script needs full machine-readable data.
+
+```sh
+ui list --limit 20
+ui events list --limit 20 --verbose
+ui events show <event-id>
+ui webhooks list --limit 20
+ui webhooks inspect <channel-id> --json
 ```
 
 ## The variant picker
